@@ -777,41 +777,173 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { min-height: 50vw; max-height: 60vw; }
-    .features-strip { grid-template-columns: 1fr; }
-    .feature-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .home-intro { grid-template-columns: 1fr; gap: 3rem; }
-    .team-hero { grid-template-columns: 1fr; gap: 2rem; padding: 5rem 6vw 3rem; }
-    .doctor-section { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 6vw; }
-    .doctor-badge { right: 0; }
-    .staff-grid { grid-template-columns: 1fr; }
-    .leistungen-grid { grid-template-columns: 1fr; }
-    .kontakt-hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2.5rem 6vw; }
-    .kontakt-hero-divider { display: none; }
-    .kontakt-body { grid-template-columns: 1fr; }
-    .kontakt-hero-block { padding: 0 !important; }
-    .kontakt-info { padding: 3rem 6vw; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6,.gi-7,.gi-8,.gi-9 { grid-column: span 1 !important; grid-row: span 1 !important; }
-    .gallery-grid { gap: 8px; padding: 2rem 5vw 4rem; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
+
+    /* NAV */
     .nav-links, .nav-cta { display: none; }
     .nav-hamburger { display: flex; }
-    .leistungen-hero { padding: 6rem 6vw 3rem; }
-    .galerie-hero { padding: 7rem 6vw 3rem; }
-    .home-intro { padding: 5rem 6vw; }
-    .staff-section { padding: 4rem 6vw; }
-    .leistungen-grid { padding: 3rem 6vw; }
+
+    /* ── HERO: Bild zuerst, groß – Text darunter mit Overlap ── */
+    .hero {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      min-height: unset;
+      padding-top: 80px;
+    }
+    .hero-right {
+      order: -1;
+      min-height: 72vw;
+      max-height: 88vw;
+      position: relative;
+    }
+    /* Weicher Ausblend-Gradient unten */
+    .hero-right::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(to top, var(--cream) 5%, transparent 100%);
+      pointer-events: none; z-index: 3;
+    }
+    .hero-img-fade-left { display: none; }
+    .hero-img-wrap img { object-position: center 10%; }
+
+    /* Text zieht sich über das Bild-Ende */
+    .hero-left {
+      order: 0;
+      padding: 0 6vw 5vw;
+      background: transparent;
+      margin-top: -5.5rem;
+      position: relative; z-index: 4;
+    }
+    .hero-eyebrow { margin-bottom: 0.5rem; }
+    .hero-title {
+      font-size: clamp(2.2rem, 8.5vw, 3.2rem);
+      margin-bottom: 0.8rem;
+    }
+    .hero-sub {
+      font-size: var(--text-base);
+      margin-bottom: var(--space-md);
+      max-width: 100%;
+    }
+    .hero-buttons { flex-direction: column; gap: 0.7rem; }
+    .btn-primary, .btn-outline {
+      text-align: center;
+      padding: 1rem 2rem;
+    }
+
+    /* FEATURES: horizontal swipe-Karten */
+    .features-strip {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .features-strip::-webkit-scrollbar { display: none; }
+    .feature-item {
+      min-width: 76vw;
+      scroll-snap-align: start;
+      border-right: 1px solid rgba(255,255,255,0.12);
+      border-bottom: none;
+      padding: 2.5rem 2rem;
+      flex-shrink: 0;
+    }
+
+    /* HOME INTRO */
+    .home-intro {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 4rem 6vw 5rem;
+    }
+    .intro-img-block { aspect-ratio: 4/3; }
+    .intro-img-block::before { display: none; }
+    .intro-stat { bottom: -1rem; left: 1rem; padding: 1rem 1.5rem; }
+    .intro-stat strong { font-size: 2rem; }
+
+    /* TEAM */
+    .team-hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 5rem 6vw 3rem; }
+    .doctor-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3.5rem 6vw; }
+    .doctor-photo-inner { aspect-ratio: 4/5; max-height: 78vw; }
+    .doctor-badge { right: 0; bottom: 1rem; font-size: var(--text-sm); padding: 0.8rem 1rem; }
+    .doctor-quals { gap: 0.4rem; }
+    .qual-tag { padding: 0.35rem 0.8rem; font-size: 0.78rem; }
+
+    /* STAFF: swipe-Karten */
+    .staff-section { padding: 3.5rem 6vw; }
+    .staff-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 1.2rem;
+      padding-bottom: 0.5rem;
+    }
+    .staff-grid::-webkit-scrollbar { display: none; }
+    .staff-card { min-width: 74vw; scroll-snap-align: start; flex-shrink: 0; }
+
+    /* LEISTUNGEN */
+    .leistungen-hero { padding: 6rem 6vw 2.5rem; }
+    .leistungen-grid { grid-template-columns: 1fr; padding: 2rem 6vw; gap: 2px; }
+    .leistung-card { padding: 1.8rem 2rem; gap: 1.2rem; }
+    .leistung-icon { width: 42px; height: 42px; font-size: 1.2rem; }
     .leistungen-cta { padding: 3rem 6vw; }
+
+    /* KONTAKT */
+    .kontakt-hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2.5rem 6vw; }
+    .kontakt-hero-divider { display: none; }
+    .kontakt-hero-block { padding: 0 !important; }
+    .kontakt-body { grid-template-columns: 1fr; }
+    .kontakt-info { padding: 3rem 6vw; }
+    .kontakt-map-wrap iframe { height: 280px; }
+    .kontakt-adresse { padding: 2rem 6vw; }
+
+    /* GALERIE */
+    .galerie-hero { padding: 6rem 6vw 2.5rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      gap: 8px;
+      padding: 1.5rem 5vw 4rem;
+    }
+    .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6,.gi-7,.gi-8,.gi-9 {
+      grid-column: span 1 !important;
+      grid-row: span 1 !important;
+      height: 42vw;
+    }
+
+    /* FOOTER */
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     footer { padding: 4rem 6vw 2rem; }
   }
 
   @media (max-width: 600px) {
-    .footer-top { grid-template-columns: 1fr; }
-    .hero-left { padding: 5vw 6vw 5vw 6vw; }
+    nav { height: 68px; padding: 0 5vw; }
+    .hero { padding-top: 68px; }
+    .hero-right { min-height: 82vw; max-height: 100vw; }
+    .hero-left { margin-top: -6rem; padding: 0 5vw 5vw; }
+    .hero-title { font-size: clamp(2rem, 9.5vw, 2.8rem); }
+    .hero-sub { font-size: var(--text-sm); margin-bottom: 1rem; }
+    .hero-buttons { gap: 0.6rem; }
+
+    .feature-item { min-width: 85vw; padding: 2rem 1.5rem; }
+
+    .home-intro { padding: 3rem 5vw 4rem; }
+
+    .staff-card { min-width: 84vw; }
+
     .gallery-grid { grid-template-columns: 1fr; }
-    .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6,.gi-7,.gi-8,.gi-9 { grid-column: 1 !important; }
+    .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6,.gi-7,.gi-8,.gi-9 {
+      grid-column: 1 !important;
+      height: 56vw;
+    }
+
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+
+    .kontakt-hero-value { font-size: 1.15rem; }
+    .doctor-photo-inner { max-height: 92vw; }
+    .mobile-menu a { font-size: 1.6rem; }
   }
 </style>
 </head>
@@ -1200,7 +1332,7 @@
       <div class="kontakt-section">
         <h2 class="kontakt-section-title">Telefon &amp; E-Mail</h2>
         <a href="tel:+432262XXXXX" class="kontakt-phone-link">+43 2262 / XXX XX</a>
-        <a href="/cdn-cgi/l/email-protection#e9869b8d8087889d808687a98d9bc4889c8488909bc7889d" class="kontakt-email-link"><span class="__cf_email__" data-cfemail="d0bfa2b4b9beb1a4b9bfbe90b4a2fdb1a5bdb1a9a2feb1a4">[email&#160;protected]</span></a>
+        <a href="mailto:ordination@dr-aumayr.at">ordination@dr-aumayr.at</a>
         <a href="https://www.dr-aumayr.at" target="_blank" class="kontakt-web-link">www.dr-aumayr.at</a>
       </div>
 
@@ -1225,7 +1357,7 @@
         <p class="kontakt-adresse-wahlarzt">Wahlarzt-Praxis – keine Kassenstelle</p>
         <div class="kontakt-adresse-links">
           <a href="tel:+432262XXXXX">+43 2262 / XXX XX</a>
-          <a href="/cdn-cgi/l/email-protection#6d021f0904030c190402032d091f400c18000c141f430c19"><span class="__cf_email__" data-cfemail="97f8e5f3fef9f6e3fef8f9d7f3e5baf6e2faf6eee5b9f6e3">[email&#160;protected]</span></a>
+          <a href="mailto:ordination@dr-aumayr.at">ordination@dr-aumayr.at</a>
         </div>
       </div>
     </div>
@@ -1250,7 +1382,7 @@
       <p style="margin-top:0.6rem;">Hauptplatz 12<br>2100 Korneuburg<br>Niederösterreich, Österreich</p>
       <p style="margin-top:0.6rem;">
         Telefon: <a href="tel:+432262XXXXX">+43 2262 / XXX XX</a><br>
-        E-Mail: <a href="/cdn-cgi/l/email-protection#076875636e6966736e68694763752a66726a667e75296673"><span class="__cf_email__" data-cfemail="79160b1d1017180d101617391d0b54180c1418000b57180d">[email&#160;protected]</span></a><br>
+        E-Mail: <a href="mailto:ordination@dr-aumayr.at">ordination@dr-aumayr.at</a><br>
         Web: <a href="https://www.dr-aumayr.at" target="_blank">www.dr-aumayr.at</a>
       </p>
     </div>
@@ -1325,7 +1457,7 @@
         Fachärztin für Dermatologie und ästhetische Medizin<br>
         Hauptplatz 12, 2100 Korneuburg<br>
         Telefon: <a href="tel:+432262XXXXX">+43 2262 / XXX XX</a><br>
-        E-Mail: <a href="/cdn-cgi/l/email-protection#9af5e8fef3f4fbeef3f5f4dafee8b7fbeff7fbe3e8b4fbee"><span class="__cf_email__" data-cfemail="5a35283e33343b2e3335341a3e28773b2f373b2328743b2e">[email&#160;protected]</span></a>
+        E-Mail: <a href="mailto:ordination@dr-aumayr.at">ordination@dr-aumayr.at</a>
       </p>
     </div>
 
@@ -1365,7 +1497,7 @@
       <p>
         <strong>Auskunft</strong> (Art. 15 DSGVO) · <strong>Berichtigung</strong> (Art. 16 DSGVO) · <strong>Löschung</strong> (Art. 17 DSGVO) · <strong>Einschränkung</strong> (Art. 18 DSGVO) · <strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO) · <strong>Widerspruch</strong> (Art. 21 DSGVO)
       </p>
-      <p style="margin-top:0.6rem;">Zur Ausübung Ihrer Rechte: <a href="/cdn-cgi/l/email-protection#adc2dfc9c4c3ccd9c4c2c3edc9df80ccd8c0ccd4df83ccd9"><span class="__cf_email__" data-cfemail="1a75687e73747b6e7375745a7e68377b6f777b6368347b6e">[email&#160;protected]</span></a></p>
+      <p style="margin-top:0.6rem;">Zur Ausübung Ihrer Rechte: <a href="mailto:ordination@dr-aumayr.at">ordination@dr-aumayr.at</a></p>
     </div>
 
     <div class="impressum-block">
@@ -1417,7 +1549,7 @@
       <p>Hauptplatz 12</p>
       <p>2100 Korneuburg</p>
       <a href="tel:+432262XXXXX">+43 2262 / XXX XX</a>
-      <a href="/cdn-cgi/l/email-protection#305f4254595e5144595f5e7054421d51455d5149421e5144"><span class="__cf_email__" data-cfemail="442b36202d2a25302d2b2a04203669253129253d366a2530">[email&#160;protected]</span></a>
+      <a href="mailto:ordination@dr-aumayr.at">ordination@dr-aumayr.at</a>
       <p style="margin-top:0.5rem;">Mo–Fr: 08:00–12:00 Uhr</p>
       <p>Mo, Mi, Do: 14:00–17:00 Uhr</p>
     </div>
