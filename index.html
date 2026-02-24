@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Martina Aumayr – Hautärztin in Korneuburg · Variante A</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf9f7;
+    --warm-white: #f8f2f0;
+    --blush: #ddb8c4;
+    --blush-light: #f0dde5;
+    --terracotta: #9e6080;
+    --terracotta-dark: #7d4963;
+    --sage: #8a9e8f;
+    --sage-light: #c8d5cb;
+    --brown: #3d2640;
+    --text: #1e1020;
+    --text-light: #4a3050;
+    --text-muted: #826878;
+    --gold: #c9a87a;
+    --rose: #c0748e;
+    --greige: #ede0e8;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'DM Sans', system-ui, sans-serif;
+    --text-xs:   0.87rem;
+    --text-sm:   1rem;
+    --text-base: 1.12rem;
+    --text-md:   1.22rem;
+    --text-lg:   1.3rem;
+    --text-xl:   1.6rem;
+    --text-2xl:  2.1rem;
+    --text-3xl:  clamp(2.2rem, 3.5vw, 2.8rem);
+    --text-4xl:  clamp(2.8rem, 4.5vw, 3.8rem);
+    --text-hero: clamp(3rem, 5.5vw, 4.5rem);
+    --space-xs:  0.5rem;
+    --space-sm:  1rem;
+    --space-md:  1.5rem;
+    --space-lg:  2.5rem;
+    --space-xl:  4rem;
+    --space-2xl: 6rem;
+    --space-3xl: 8rem;
+    --letter-wide:  0.08em;
+    --letter-wider: 0.15em;
+    --letter-widest:0.25em;
+    --lh-tight:  1.1;
+    --lh-snug:   1.35;
+    --lh-normal: 1.65;
+    --lh-relaxed:1.9;
+    --lh-loose:  2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--cream);
+    color: var(--text);
+    font-weight: 300;
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  p { line-height: var(--lh-relaxed); }
+  strong { font-weight: 500; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(250,248,245,0.98);
+    backdrop-filter: blur(14px);
+    border-bottom: 2px solid rgba(158,96,128,0.2);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 80px;
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 40px rgba(61,38,64,0.1); }
+  .nav-logo {
+    font-family: var(--font-serif);
+    font-size: 1.55rem; font-weight: 500;
+    color: var(--brown); letter-spacing: 0.01em;
+    text-decoration: none;
+    display: flex; flex-direction: column; line-height: 1.25;
+  }
+  .nav-logo span {
+    font-size: 0.73rem; font-family: var(--font-sans);
+    font-weight: 400; color: var(--terracotta);
+    letter-spacing: var(--letter-widest); text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text);
+    font-size: 0.92rem; letter-spacing: 0.12em;
+    text-transform: uppercase; font-weight: 400;
+    transition: color 0.3s;
+    position: relative; padding-bottom: 4px;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 2px; background: var(--terracotta);
+    transform: scaleX(0); transition: transform 0.35s ease;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: var(--terracotta); color: white; border: none;
+    padding: 0.75rem 1.8rem; font-family: var(--font-sans);
+    font-size: 0.88rem; letter-spacing: 0.12em;
+    text-transform: uppercase; cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    text-decoration: none; font-weight: 400;
+  }
+  .nav-cta:hover { background: var(--terracotta-dark); transform: translateY(-1px); }
+
+  /* Hamburger */
+  .nav-hamburger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    width: 36px; height: 36px; cursor: pointer; background: none; border: none;
+    padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block; height: 2px; background: var(--brown);
+    transition: all 0.3s; border-radius: 1px;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile menu overlay */
+  .mobile-menu {
+    display: none; position: fixed; top: 80px; left: 0; right: 0; bottom: 0;
+    background: var(--cream); z-index: 999;
+    flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: var(--font-serif); font-size: 2rem; font-weight: 300;
+    color: var(--brown); text-decoration: none; letter-spacing: 0.02em;
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--terracotta); }
+  .mobile-menu .mobile-cta {
+    background: var(--terracotta); color: white;
+    padding: 1rem 3rem; font-family: var(--font-sans);
+    font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase;
+    margin-top: 1rem;
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ── HOME ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 7vw 5vw 7vw 9vw;
+    background: linear-gradient(105deg, var(--cream) 70%, rgba(240,221,232,0.35) 100%);
+    position: relative; z-index: 1;
+  }
+  .hero-eyebrow {
+    font-size: var(--text-xs); letter-spacing: var(--letter-widest);
+    text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: var(--space-md); font-weight: 400;
+  }
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-hero);
+    font-weight: 300; line-height: var(--lh-tight);
+    color: var(--brown); margin-bottom: var(--space-sm);
+    letter-spacing: -0.01em;
+  }
+  .hero-title em { font-style: italic; color: var(--terracotta); }
+  .hero-sub {
+    font-size: var(--text-md); color: var(--text-light); max-width: 420px;
+    margin-bottom: var(--space-lg); line-height: var(--lh-relaxed);
+    font-weight: 300;
+  }
+  .hero-buttons { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--terracotta); color: white;
+    padding: 0.9rem 2.4rem; border: none; cursor: pointer;
+    font-family: var(--font-sans); font-size: var(--text-xs);
+    letter-spacing: var(--letter-wider); text-transform: uppercase;
+    transition: background 0.3s, transform 0.2s; text-decoration: none;
+    display: inline-block; font-weight: 400;
+  }
+  .btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--terracotta);
+    padding: 0.9rem 2.4rem; border: 1.5px solid var(--terracotta);
+    cursor: pointer; font-family: var(--font-sans); font-size: var(--text-xs);
+    letter-spacing: var(--letter-wider); text-transform: uppercase;
+    transition: all 0.3s; text-decoration: none; display: inline-block; font-weight: 400;
+  }
+  .btn-outline:hover { background: var(--blush-light); }
+  .hero-right {
+    position: relative; overflow: hidden;
+    background: var(--blush-light);
+  }
+  .hero-img-wrap {
+    width: 100%; height: 100%;
+    position: relative;
+  }
+  .hero-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center top;
+    display: block;
+  }
+  .hero-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(250,248,245,0.18) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(61,38,64,0.04) 100%
+    );
+    pointer-events: none;
+  }
+  .hero-detail {
+    position: absolute; bottom: 2.5rem; left: 2rem;
+    background: white; padding: 1.2rem 1.8rem;
+    box-shadow: 0 8px 40px rgba(61,38,64,0.13);
+    border-left: 3px solid var(--rose);
+  }
+  .hero-detail strong {
+    display: block; font-family: var(--font-serif);
+    font-size: var(--text-xl); color: var(--brown); font-weight: 400;
+    line-height: var(--lh-snug); margin-bottom: 0.2rem;
+  }
+  .hero-detail span {
+    font-size: var(--text-xs); color: var(--text-muted);
+    letter-spacing: var(--letter-wide);
+  }
+  .hero-ornament {
+    position: absolute; top: 3rem; right: 3rem;
+    width: 80px; height: 80px; border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 50%;
+  }
+  .hero-img-fade-left {
+    position: absolute; top: 0; left: 0; bottom: 0; width: 60px;
+    background: linear-gradient(to right, var(--cream), transparent);
+    pointer-events: none; z-index: 2;
+  }
+
+  /* Features strip */
+  .features-strip {
+    background: var(--brown);
+    display: grid; grid-template-columns: repeat(3, 1fr);
+  }
+  .feature-item {
+    padding: var(--space-xl) 3rem;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: flex-start; gap: var(--space-md);
+  }
+  .feature-item:last-child { border-right: none; }
+  .feature-icon { font-size: 1.6rem; margin-top: 0.25rem; flex-shrink: 0; }
+  .feature-item h3 {
+    font-family: var(--font-serif); font-size: var(--text-lg);
+    color: var(--blush-light); font-weight: 400;
+    margin-bottom: 0.4rem; line-height: var(--lh-snug);
+  }
+  .feature-item p {
+    font-size: var(--text-sm); color: rgba(255,255,255,0.45);
+    line-height: var(--lh-normal);
+  }
+
+  /* Home intro section */
+  .home-intro {
+    padding: var(--space-2xl) 9vw;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .section-eyebrow {
+    font-size: var(--text-xs); letter-spacing: var(--letter-widest);
+    text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: var(--space-sm); font-weight: 400; display: block;
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-3xl); font-weight: 300;
+    color: var(--brown); line-height: var(--lh-tight);
+    margin-bottom: var(--space-md); letter-spacing: -0.01em;
+  }
+  .section-title em { font-style: italic; }
+  .home-intro-text p {
+    color: var(--text-light); margin-bottom: var(--space-sm);
+    font-size: var(--text-base); line-height: var(--lh-relaxed);
+  }
+  .intro-visual { position: relative; }
+  .intro-img-block {
+    width: 100%; aspect-ratio: 4/5;
+    background: linear-gradient(135deg, var(--blush-light) 0%, var(--blush) 100%);
+    position: relative; display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .intro-img-block::before {
+    content: ''; position: absolute;
+    top: -1.5rem; right: -1.5rem;
+    width: 60%; height: 60%;
+    border: 1.5px solid var(--blush); z-index: -1;
+  }
+  .intro-img-block img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .intro-stat {
+    position: absolute; bottom: -1.5rem; left: -1.5rem;
+    background: var(--rose); color: white; padding: 1.5rem 2rem;
+  }
+  .intro-stat strong {
+    display: block; font-family: var(--font-serif);
+    font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; line-height: 1;
+  }
+  .intro-stat span { font-size: var(--text-xs); letter-spacing: var(--letter-wide); opacity: 0.85; }
+
+  .section { padding: var(--space-2xl) 9vw; }
+  .section-header { text-align: center; margin-bottom: var(--space-xl); }
+  .divider {
+    width: 36px; height: 1.5px; background: var(--terracotta);
+    margin: var(--space-sm) auto 0;
+  }
+
+  /* ── TEAM PAGE ── */
+  .team-hero {
+    background: var(--brown);
+    padding: 7rem 9vw 4rem;
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: end;
+  }
+  .team-hero-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-4xl); font-weight: 300;
+    color: var(--cream); line-height: var(--lh-tight);
+    letter-spacing: -0.01em;
+  }
+  .team-hero-title em { font-style: italic; color: var(--blush); }
+  .team-hero-text {
+    color: rgba(255,255,255,0.55); font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+  }
+
+  .doctor-section {
+    padding: var(--space-2xl) 9vw;
+    display: grid; grid-template-columns: 1fr 1.3fr; gap: 6rem; align-items: start;
+  }
+  .doctor-photo { position: relative; }
+  .doctor-photo-inner {
+    width: 100%; aspect-ratio: 3/4;
+    background: linear-gradient(160deg, var(--blush-light), var(--blush));
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .doctor-photo-inner img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .doctor-badge {
+    position: absolute; bottom: 1.5rem; right: -1.5rem;
+    background: var(--terracotta); color: white;
+    padding: 1.2rem 1.5rem;
+    font-family: var(--font-serif); font-size: var(--text-base);
+    font-weight: 400; line-height: var(--lh-snug);
+  }
+  .doctor-info .eyebrow {
+    color: var(--terracotta); font-size: var(--text-xs);
+    letter-spacing: var(--letter-widest); text-transform: uppercase;
+    margin-bottom: var(--space-xs); display: block;
+  }
+  .doctor-name {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 3.5vw, 3rem);
+    font-weight: 300; color: var(--brown);
+    line-height: var(--lh-tight); margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  .doctor-title-sub {
+    color: var(--text-muted); font-size: var(--text-xs);
+    letter-spacing: var(--letter-wider); text-transform: uppercase;
+    margin-bottom: var(--space-lg); font-weight: 400;
+  }
+  .doctor-bio {
+    color: var(--text-light); font-size: var(--text-base);
+    line-height: var(--lh-relaxed); margin-bottom: var(--space-sm);
+  }
+  .doctor-quals { margin-top: var(--space-lg); display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .qual-tag {
+    background: var(--blush-light); color: var(--terracotta-dark);
+    padding: 0.4rem 1rem; font-size: var(--text-xs);
+    letter-spacing: var(--letter-wide); font-weight: 400;
+  }
+
+  .team-divider {
+    border: none; border-top: 1px solid rgba(180,100,150,0.2);
+    margin: 0 9vw;
+  }
+
+  .staff-section { padding: var(--space-2xl) 9vw; }
+  .staff-section h2 {
+    font-family: var(--font-serif); font-size: var(--text-2xl);
+    font-weight: 300; color: var(--brown); margin-bottom: var(--space-xl);
+    position: relative; padding-left: 1.5rem; line-height: var(--lh-snug);
+  }
+  .staff-section h2::before {
+    content: ''; position: absolute; left: 0; top: 50%;
+    width: 4px; height: 70%; background: var(--terracotta);
+    transform: translateY(-50%);
+  }
+  .staff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+  .staff-card {
+    background: white; overflow: hidden;
+    box-shadow: 0 2px 20px rgba(80,30,70,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .staff-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(80,30,70,0.12); }
+  .staff-photo {
+    aspect-ratio: 1/1; overflow: hidden;
+    background: linear-gradient(135deg, var(--blush-light), var(--sage-light));
+    display: flex; align-items: center; justify-content: center;
+  }
+  .staff-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .staff-info { padding: 1.6rem 1.8rem; }
+  .staff-info h3 {
+    font-family: var(--font-serif); font-size: var(--text-xl);
+    color: var(--brown); font-weight: 400;
+    margin-bottom: 0.2rem; line-height: var(--lh-snug);
+  }
+  .staff-role {
+    font-size: var(--text-xs); color: var(--terracotta);
+    letter-spacing: var(--letter-wider); text-transform: uppercase;
+    margin-bottom: var(--space-sm); display: block;
+  }
+  .staff-info p {
+    font-size: var(--text-sm); color: var(--text-light);
+    line-height: var(--lh-normal);
+  }
+
+  /* ── LEISTUNGEN PAGE ── */
+  .leistungen-hero {
+    background: linear-gradient(160deg, var(--brown) 0%, #3a1e3a 100%);
+    padding: 7rem 9vw 3.5rem; text-align: center;
+  }
+  .leistungen-hero .section-eyebrow { color: var(--blush); }
+  .leistungen-hero .section-title { color: var(--cream); margin: 0 auto 1.5rem; max-width: 600px; }
+  .leistungen-hero p {
+    color: rgba(255,255,255,0.5); max-width: 520px; margin: 0 auto;
+    font-size: var(--text-base); line-height: var(--lh-relaxed);
+  }
+  .leistungen-grid {
+    padding: var(--space-2xl) 9vw;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+    background: rgba(180,100,150,0.1);
+  }
+  .leistung-card {
+    background: white; padding: 3rem 3.5rem;
+    display: flex; gap: 2rem; align-items: flex-start;
+    transition: background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .leistung-card::after {
+    content: ''; position: absolute; bottom: 0; left: 3.5rem; right: 3.5rem;
+    height: 2px; background: var(--terracotta);
+    transform: scaleX(0); transition: transform 0.4s;
+  }
+  .leistung-card:hover { background: var(--warm-white); }
+  .leistung-card:hover::after { transform: scaleX(1); }
+  .leistung-icon {
+    width: 50px; height: 50px; flex-shrink: 0;
+    background: var(--blush-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .leistung-card h3 {
+    font-family: var(--font-serif); font-size: var(--text-xl);
+    color: var(--brown); font-weight: 400;
+    margin-bottom: 0.5rem; line-height: var(--lh-snug);
+  }
+  .leistung-card p {
+    font-size: var(--text-sm); color: var(--text-light);
+    line-height: var(--lh-relaxed);
+  }
+  .leistungen-cta {
+    background: var(--cream); padding: 5rem; text-align: center;
+    border-top: 1px solid rgba(180,100,150,0.15);
+  }
+  .leistungen-cta p {
+    color: var(--text-light); margin: var(--space-sm) 0 var(--space-lg);
+    font-size: var(--text-md);
+  }
+
+  /* ── KONTAKT PAGE ── */
+  .kontakt-page { padding-top: 80px; }
+  .kontakt-hero {
+    background: var(--brown);
+    padding: 3.5rem 9vw;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center; gap: 0;
+  }
+  .kontakt-hero-divider {
+    width: 1px; height: 56px;
+    background: rgba(255,255,255,0.15);
+  }
+  .kontakt-hero-block { padding: 0 3.5rem; }
+  .kontakt-hero-block:first-child { padding-left: 0; }
+  .kontakt-hero-block:last-child { padding-right: 0; }
+  .kontakt-hero-label {
+    display: block;
+    font-size: var(--text-xs); letter-spacing: var(--letter-widest);
+    text-transform: uppercase; color: var(--blush);
+    margin-bottom: 0.5rem; font-weight: 400;
+  }
+  .kontakt-hero-value {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 1.8vw, 1.75rem);
+    color: white; font-weight: 300; line-height: var(--lh-snug);
+    display: block;
+  }
+  .kontakt-hero-link { text-decoration: none; transition: color 0.3s; }
+  .kontakt-hero-link:hover { color: var(--blush) !important; }
+  .kontakt-hero-sub {
+    font-size: var(--text-sm); color: rgba(255,255,255,0.45);
+    margin-top: 0.3rem; line-height: var(--lh-normal);
+  }
+  .kontakt-body {
+    display: grid; grid-template-columns: 1.1fr 0.9fr;
+    min-height: calc(100vh - 80px - 130px);
+  }
+  .kontakt-info {
+    padding: 5rem 5vw 5rem 9vw;
+    background: var(--warm-white);
+    border-right: 1px solid rgba(180,100,150,0.15);
+  }
+  .oeffnung-table { margin-bottom: 3rem; }
+  .oeffnung-table-title {
+    font-family: var(--font-sans) !important;
+    font-size: var(--text-base) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--brown) !important;
+    margin-bottom: 1rem !important; padding-bottom: 0.6rem !important;
+    border-bottom: 2px solid var(--blush-light) !important;
+  }
+  .oeffnung-row {
+    display: flex; justify-content: space-between;
+    padding: 0.9rem 0; border-bottom: 1px solid rgba(180,100,150,0.1);
+    align-items: center;
+  }
+  .oeffnung-row:last-child { border-bottom: none; }
+  .oeffnung-row span:first-child {
+    font-weight: 500; color: var(--text); font-size: var(--text-base);
+  }
+  .oeffnung-row span:last-child {
+    color: var(--text-light); font-size: var(--text-base);
+    text-align: right;
+  }
+  .oeffnung-row.closed span { color: var(--text-muted); font-weight: 300; }
+  .kontakt-section { margin-bottom: 2.8rem; }
+  .kontakt-section-title {
+    font-family: var(--font-sans); font-size: var(--text-base);
+    color: var(--brown); font-weight: 600;
+    margin-bottom: 1rem; padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--blush-light);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .kontakt-section p {
+    font-size: var(--text-base); color: var(--text-light);
+    line-height: var(--lh-relaxed);
+  }
+  .kontakt-section a {
+    display: block; font-size: var(--text-base);
+    color: var(--text-light); text-decoration: none;
+    line-height: var(--lh-loose); transition: color 0.3s;
+  }
+  .kontakt-section a:hover { color: var(--terracotta); }
+  .kontakt-phone-link {
+    font-family: var(--font-serif) !important;
+    font-size: clamp(1.7rem, 2.5vw, 2.3rem) !important;
+    color: var(--terracotta) !important;
+    font-weight: 300 !important; letter-spacing: 0.02em;
+    text-decoration: none !important;
+    display: block !important; margin-bottom: 0.4rem;
+    transition: color 0.3s;
+  }
+  .kontakt-phone-link:hover { color: var(--terracotta-dark) !important; }
+  .kontakt-email-link, .kontakt-web-link {
+    font-size: var(--text-base) !important;
+    color: var(--text-light) !important;
+    text-decoration: none; display: block;
+    line-height: var(--lh-loose); transition: color 0.3s;
+  }
+  .kontakt-email-link:hover, .kontakt-web-link:hover { color: var(--terracotta) !important; }
+  .kontakt-anreise {
+    margin-top: 0.8rem; padding-top: 0.8rem;
+    border-top: 1px solid rgba(180,100,150,0.12);
+    font-size: var(--text-sm) !important;
+    color: var(--text-muted) !important;
+    line-height: var(--lh-relaxed);
+  }
+  .kontakt-map-col { display: flex; flex-direction: column; }
+  .kontakt-map-wrap { flex-shrink: 0; }
+  .kontakt-map-wrap iframe {
+    width: 100%; height: 360px; border: none; display: block;
+    filter: sepia(0.12) saturate(0.9);
+  }
+  .kontakt-adresse {
+    flex: 1; padding: 2.5rem 3rem;
+    background: var(--cream);
+    border-top: 3px solid var(--blush-light);
+  }
+  .kontakt-adresse-name {
+    font-family: var(--font-serif); font-size: var(--text-xl);
+    color: var(--brown); font-weight: 400;
+    margin-bottom: 0.6rem; display: block;
+  }
+  .kontakt-adresse p {
+    font-size: var(--text-base); color: var(--text-light);
+    line-height: var(--lh-relaxed);
+  }
+  .kontakt-adresse-wahlarzt {
+    font-size: var(--text-sm) !important;
+    color: var(--terracotta) !important;
+    margin-top: 0.5rem !important; font-weight: 400;
+  }
+  .kontakt-adresse-links {
+    margin-top: 1.2rem; padding-top: 1.2rem;
+    border-top: 1px solid rgba(180,100,150,0.15);
+  }
+  .kontakt-adresse-links a {
+    color: var(--text-light); text-decoration: none;
+    font-size: var(--text-base); display: block;
+    line-height: var(--lh-loose); transition: color 0.3s;
+  }
+  .kontakt-adresse-links a:hover { color: var(--terracotta); }
+
+  /* ── GALERIE PAGE ── */
+  .galerie-hero {
+    padding: 10rem 9vw 4rem;
+    background: var(--warm-white);
+    border-bottom: 1px solid rgba(180,100,150,0.1);
+  }
+  .galerie-hero p {
+    color: var(--text-light); max-width: 500px;
+    margin-top: var(--space-sm); font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+  }
+  .gallery-grid {
+    padding: 3rem 9vw 6rem;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(3, 280px);
+    gap: 12px;
+  }
+  .gallery-item {
+    overflow: hidden; position: relative; cursor: pointer;
+    background: var(--blush-light);
+  }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+  .gallery-item:hover img { transform: scale(1.05); }
+  .gi-1 { grid-column: 1/5; grid-row: 1/2; }
+  .gi-2 { grid-column: 5/9; grid-row: 1/2; }
+  .gi-3 { grid-column: 9/13; grid-row: 1/3; }
+  .gi-4 { grid-column: 1/3; grid-row: 2/3; }
+  .gi-5 { grid-column: 3/7; grid-row: 2/3; }
+  .gi-6 { grid-column: 7/9; grid-row: 2/3; }
+  .gi-7 { grid-column: 1/4; grid-row: 3/4; }
+  .gi-8 { grid-column: 4/8; grid-row: 3/4; }
+  .gi-9 { grid-column: 8/13; grid-row: 3/4; }
+  .gallery-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(50,30,48,0.75));
+    color: white; padding: 2rem 1.2rem 0.9rem;
+    font-size: var(--text-xs); letter-spacing: var(--letter-wider);
+    text-transform: uppercase; opacity: 0; transition: opacity 0.3s;
+  }
+  .gallery-item:hover .gallery-caption { opacity: 1; }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(25,10,28,0.95);
+    align-items: center; justify-content: center;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 90vw; max-height: 85vh;
+    object-fit: contain;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.5);
+  }
+  .lightbox-close {
+    position: absolute; top: 2rem; right: 2rem;
+    color: white; font-size: 2rem; cursor: pointer;
+    background: none; border: none; opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .lightbox-close:hover { opacity: 1; }
+
+  /* ── FOOTER ── */
+  footer { background: #2a1830; padding: 5rem 9vw 2.5rem; }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem; margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-logo {
+    font-family: var(--font-serif); font-size: var(--text-xl);
+    color: var(--cream); font-weight: 400; margin-bottom: 0.3rem;
+  }
+  .footer-logo-sub {
+    font-size: var(--text-xs); color: var(--terracotta);
+    letter-spacing: var(--letter-widest); text-transform: uppercase;
+    margin-bottom: var(--space-md); display: block;
+  }
+  .footer-brand p {
+    font-size: var(--text-sm); color: rgba(255,255,255,0.4);
+    line-height: var(--lh-relaxed); max-width: 280px;
+  }
+  .footer-col h4 {
+    font-family: var(--font-sans); font-size: var(--text-xs);
+    letter-spacing: var(--letter-widest); text-transform: uppercase;
+    color: var(--blush); font-weight: 400; margin-bottom: var(--space-md);
+  }
+  .footer-col a, .footer-col p {
+    display: block; font-size: var(--text-sm); color: rgba(255,255,255,0.4);
+    text-decoration: none; line-height: var(--lh-loose); transition: color 0.3s;
+  }
+  .footer-col a:hover { color: var(--blush); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { font-size: var(--text-xs); color: rgba(255,255,255,0.22); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-size: var(--text-xs); color: rgba(255,255,255,0.28);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--blush); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .page.active .hero-left > * {
+    animation: fadeUp 0.7s ease both;
+  }
+  .page.active .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .page.active .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .page.active .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+  .page.active .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+
+  /* ── IMPRESSUM / DATENSCHUTZ ── */
+  .impressum-block {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(180,100,150,0.15);
+  }
+  .impressum-block:last-of-type { border-bottom: none; }
+  .impressum-heading {
+    font-family: var(--font-serif); font-size: var(--text-xl);
+    color: var(--brown); font-weight: 400;
+    margin-bottom: 1rem; padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--blush-light);
+  }
+  .impressum-block p {
+    font-size: var(--text-base); color: var(--text-light);
+    line-height: var(--lh-relaxed);
+  }
+  .impressum-block strong { color: var(--text); font-weight: 500; }
+  .impressum-block a {
+    color: var(--terracotta); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .impressum-block a:hover { color: var(--terracotta-dark); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 50vw; max-height: 60vw; }
+    .features-strip { grid-template-columns: 1fr; }
+    .feature-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .home-intro { grid-template-columns: 1fr; gap: 3rem; }
+    .team-hero { grid-template-columns: 1fr; gap: 2rem; padding: 5rem 6vw 3rem; }
+    .doctor-section { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 6vw; }
+    .doctor-badge { right: 0; }
+    .staff-grid { grid-template-columns: 1fr; }
+    .leistungen-grid { grid-template-columns: 1fr; }
+    .kontakt-hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2.5rem 6vw; }
+    .kontakt-hero-divider { display: none; }
+    .kontakt-body { grid-template-columns: 1fr; }
+    .kontakt-hero-block { padding: 0 !important; }
+    .kontakt-info { padding: 3rem 6vw; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6,.gi-7,.gi-8,.gi-9 { grid-column: span 1 !important; grid-row: span 1 !important; }
+    .gallery-grid { gap: 8px; padding: 2rem 5vw 4rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+    .leistungen-hero { padding: 6rem 6vw 3rem; }
+    .galerie-hero { padding: 7rem 6vw 3rem; }
+    .home-intro { padding: 5rem 6vw; }
+    .staff-section { padding: 4rem 6vw; }
+    .leistungen-grid { padding: 3rem 6vw; }
+    .leistungen-cta { padding: 3rem 6vw; }
+    footer { padding: 4rem 6vw 2rem; }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-left { padding: 5vw 6vw 5vw 6vw; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6,.gi-7,.gi-8,.gi-9 { grid-column: 1 !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo" data-page="home">
+    Dr. Martina Aumayr
+    <span>Hautärztin in Korneuburg</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" data-page="home" class="nav-link-item">Start</a></li>
+    <li><a href="#" data-page="team" class="nav-link-item">Team</a></li>
+    <li><a href="#" data-page="leistungen" class="nav-link-item">Leistungen</a></li>
+    <li><a href="#" data-page="galerie" class="nav-link-item">Galerie</a></li>
+    <li><a href="#" data-page="kontakt" class="nav-link-item">Kontakt</a></li>
+  </ul>
+  <a href="#" class="nav-cta" data-page="kontakt">Termin vereinbaren</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" data-page="home">Start</a>
+  <a href="#" data-page="team">Team</a>
+  <a href="#" data-page="leistungen">Leistungen</a>
+  <a href="#" data-page="galerie">Galerie</a>
+  <a href="#" data-page="kontakt">Kontakt</a>
+  <a href="#" data-page="kontakt" class="mobile-cta">Termin vereinbaren</a>
+</div>
+
+
+<!-- ════ HOME PAGE ════ -->
+<div id="page-home" class="page active">
+
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Facharztpraxis für Dermatologie · Wahlärztin</p>
+      <h1 class="hero-title">
+        Ihre Haut<br>in <em>besten</em><br>Händen.
+      </h1>
+      <p class="hero-sub">
+        Moderne Dermatologie mit persönlicher Betreuung. Dr. Martina Aumayr verbindet medizinische Expertise mit ganzheitlichem Wohlbefinden – für Ihre Haut, die Sie begleitet.
+      </p>
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary" data-page="kontakt">Termin vereinbaren</a>
+        <a href="#" class="btn-outline" data-page="leistungen">Unsere Leistungen</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-img-wrap">
+        <img src="Martina_Profil.jpg" alt="Dr. Martina Aumayr – Fachärztin für Dermatologie in Korneuburg">
+        <div class="hero-img-overlay"></div>
+        <div class="hero-img-fade-left"></div>
+      </div>
+      <div class="hero-ornament"></div>
+    </div>
+  </section>
+
+  <div class="features-strip">
+    <div class="feature-item">
+      <span class="feature-icon">🔬</span>
+      <div>
+        <h3>Modernste Diagnostik</h3>
+        <p>Digitale Dermatoskopie und videogestützte Hautanalyse auf höchstem technischen Niveau.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon">💊</span>
+      <div>
+        <h3>Ganzheitliche Therapie</h3>
+        <p>Individuelle Behandlungskonzepte für medizinische und ästhetische Dermatologie.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon">🤝</span>
+      <div>
+        <h3>Persönliche Betreuung</h3>
+        <p>Vertrauensvolles Arzt-Patienten-Verhältnis mit Zeit für Ihre Anliegen.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-intro">
+    <div class="home-intro-text">
+      <p class="section-eyebrow">Über die Praxis</p>
+      <h2 class="section-title">Dermatologie mit <em>Leidenschaft</em> und Kompetenz</h2>
+      <p>Willkommen in unserer Ordination in Korneuburg. Wir begleiten Sie mit Herz und Fachwissen – von der Vorsorge über die Behandlung von Hauterkrankungen bis hin zu ästhetischen Therapien.</p>
+      <p>Unser Team freut sich darauf, Sie kennenzulernen und gemeinsam mit Ihnen den besten Weg für Ihre Hautgesundheit zu finden.</p>
+      <a href="#" class="btn-primary" style="margin-top:1rem;" data-page="team">Unser Team kennenlernen</a>
+    </div>
+    <div class="intro-visual">
+      <div class="intro-img-block">
+        <img src="8B1A0210_B.jpg" alt="Dr. Martina Aumayr – Fachärztin für Dermatologie">
+      </div>
+      <div class="intro-stat">
+        <strong>20+</strong>
+        <span>Jahre Erfahrung</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ════ TEAM PAGE ════ -->
+<div id="page-team" class="page">
+
+  <div class="team-hero">
+    <div>
+      <p class="section-eyebrow" style="color:var(--blush);">Ihr Praxisteam</p>
+      <h1 class="team-hero-title">Erfahrung,<br><em>Empathie</em><br>&amp; Expertise.</h1>
+    </div>
+    <p class="team-hero-text">
+      Unser engagiertes Team aus Fachärztin und qualifizierten Mitarbeiterinnen steht Ihnen mit Kompetenz und Herzlichkeit zur Seite. Gemeinsam sorgen wir dafür, dass Sie sich in unserer Ordination wohl und gut betreut fühlen.
+    </p>
+  </div>
+
+  <div class="doctor-section">
+    <div class="doctor-photo">
+      <div class="doctor-photo-inner">
+        <img src="Martina_Profil2.jpg" alt="Dr. Martina Aumayr">
+      </div>
+      <div class="doctor-badge">Fachärztin<br>für Dermatologie</div>
+    </div>
+    <div class="doctor-info">
+      <h1 class="doctor-name">Dr. Martina Aumayr</h1>
+      <p class="doctor-title-sub">Dermatologie &amp; ästhetische Medizin</p>
+      <p class="doctor-bio">
+        Herzlich willkommen in meiner Ordination! Ich freue mich, dass Sie den Weg zu uns gefunden haben. Seit über 15 Jahren begleite ich meine Patientinnen und Patienten mit Leidenschaft und medizinischem Know-how – und das ist genau das, was mich jeden Tag aufs Neue motiviert.
+      </p>
+      <p class="doctor-bio">
+        Mein Anspruch ist es, Ihnen nicht nur die bestmögliche Diagnose und Therapie zu bieten, sondern Sie dabei als Mensch wahrzunehmen. Gemeinsam mit meinem wunderbaren Team nehmen wir uns die Zeit, die es braucht, um Ihre Anliegen zu verstehen und individuelle Lösungen zu finden – ob bei der Hautkrebsvorsorge, bei entzündlichen Hauterkrankungen oder bei ästhetischen Behandlungen.
+      </p>
+      <p class="doctor-bio">
+        Wir freuen uns auf Ihren Besuch und darauf, Sie in unserer Ordination begrüßen zu dürfen. Kommen Sie einfach auf uns zu – wir sind für Sie da.
+      </p>
+      <p class="doctor-bio" style="margin-top:1.5rem; font-style:italic; color:var(--text-muted); font-size:var(--text-sm);">
+        Herzliche Grüße,<br>
+        <strong style="font-style:normal; font-size:var(--text-base); color:var(--brown);">Dr. Martina Aumayr</strong><br>
+        <span style="font-style:normal;">Fachärztin für Dermatologie &amp; ästhetische Medizin</span>
+      </p>
+      <div class="doctor-quals">
+        <span class="qual-tag">Allergologie</span>
+        <span class="qual-tag">Dermatoskopie</span>
+        <span class="qual-tag">Lasermedizin</span>
+        <span class="qual-tag">Ästhetische Dermatologie</span>
+        <span class="qual-tag">Hauttumoren</span>
+        <span class="qual-tag">Phlebologie</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="team-divider">
+
+  <div class="staff-section">
+    <h2>Unser Team</h2>
+    <div class="staff-grid">
+
+      <div class="staff-card">
+        <div class="staff-photo">
+          <img src="Team_Kathrin.jpg" alt="Kathrin – Ordinationsassistentin">
+        </div>
+        <div class="staff-info">
+          <h3>Kathrin</h3>
+          <p class="staff-role">Ordinationsassistentin</p>
+          <p>Kathrin ist das herzliche Gesicht am Empfang und sorgt für einen reibungslosen Ablauf in der Ordination. Mit ihrer jahrelangen Erfahrung im medizinischen Bereich ist sie die erste Ansprechpartnerin für alle organisatorischen Anliegen.</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-photo">
+          <img src="Treatment_1.jpg" alt="Medizinische Kosmetikerin bei der Behandlung">
+        </div>
+        <div class="staff-info">
+          <h3>Maria</h3>
+          <p class="staff-role">Medizinische Kosmetikerin</p>
+          <p>Maria unterstützt Dr. Aumayr bei allen medizinischen Untersuchungen und ästhetischen Behandlungen. Ihre ruhige und einfühlsame Art schafft eine angenehme Atmosphäre und gibt den Patientinnen das Gefühl, in den besten Händen zu sein.</p>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-photo">
+          <img src="Treatment_Brille.jpg" alt="Laserbehandlung in der Ordination">
+        </div>
+        <div class="staff-info">
+          <h3>Julia</h3>
+          <p class="staff-role">Praxisassistentin &amp; Lasertherapie</p>
+          <p>Julia ist spezialisiert auf Laserbehandlungen und unterstützt bei ästhetischen Therapien. Ihr Fachwissen und ihr Gespür für die Bedürfnisse der Patientinnen machen sie zu einem unverzichtbaren Teil unseres Teams.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ════ LEISTUNGEN PAGE ════ -->
+<div id="page-leistungen" class="page">
+
+  <div class="leistungen-hero">
+    <h1 class="section-title">Unsere <em>Leistungen</em></h1>
+    <p>Umfassende dermatologische Versorgung auf höchstem medizinischen Niveau – von der Vorsorge bis zur ästhetischen Behandlung.</p>
+  </div>
+
+  <div class="leistungen-grid">
+
+    <div class="leistung-card">
+      <div class="leistung-icon">🔍</div>
+      <div>
+        <h3>Hautkrebsvorsorge &amp; Screening</h3>
+        <p>Regelmäßige Kontrollen und digitale Dermatoskopie zur Früherkennung von Melanomen und anderen Hauttumoren. Wir empfehlen eine jährliche Untersuchung ab dem 35. Lebensjahr.</p>
+      </div>
+    </div>
+
+    <div class="leistung-card">
+      <div class="leistung-icon">🌿</div>
+      <div>
+        <h3>Allergologie &amp; Ekzeme</h3>
+        <p>Diagnose und Therapie von Kontaktallergien, Neurodermitis und Urtikaria. Prick-Test, Epicutantest und RAST zur umfassenden Allergiediagnostik.</p>
+      </div>
+    </div>
+
+    <div class="leistung-card">
+      <div class="leistung-icon">✨</div>
+      <div>
+        <h3>Ästhetische Dermatologie</h3>
+        <p>Botox, Hyaluronsäure-Filler, chemische Peelings und Anti-Aging-Behandlungen für ein natürliches, frisches Erscheinungsbild – immer mit medizinischem Sachverstand.</p>
+      </div>
+    </div>
+
+    <div class="leistung-card">
+      <div class="leistung-icon">💡</div>
+      <div>
+        <h3>Laserbehandlungen</h3>
+        <p>Lasertherapie bei Gefäßveränderungen, Pigmentstörungen, Narben und zur Hautstraffung. Modernste Geräte für schonende und effektive Behandlungen.</p>
+      </div>
+    </div>
+
+    <div class="leistung-card">
+      <div class="leistung-icon">🧴</div>
+      <div>
+        <h3>Akne &amp; Rosacea</h3>
+        <p>Individuelle Therapiekonzepte bei Akne vulgaris, Rosazea und seborrhoischer Dermatitis – von topischen Behandlungen bis zur systemischen Therapie.</p>
+      </div>
+    </div>
+
+    <div class="leistung-card">
+      <div class="leistung-icon">🩺</div>
+      <div>
+        <h3>Wundbehandlung &amp; Chirurgie</h3>
+        <p>Operative Entfernung gutartiger Hautveränderungen wie Fibrome, Atherome und Warzen. Sorgfältige Wundversorgung und Nachbehandlung.</p>
+      </div>
+    </div>
+
+    <div class="leistung-card">
+      <div class="leistung-icon">🦶</div>
+      <div>
+        <h3>Phlebologie</h3>
+        <p>Diagnostik und Behandlung von Venenerkrankungen, Besenreisern und Krampfadern mittels Sklerotherapie und Kompressionstherapie.</p>
+      </div>
+    </div>
+
+    <div class="leistung-card">
+      <div class="leistung-icon">💆</div>
+      <div>
+        <h3>Psoriasis &amp; Chronische Hauterkrankungen</h3>
+        <p>Umfassende Betreuung bei Schuppenflechte und anderen chronischen Dermatosen mit modernen Therapieoptionen einschließlich Biologika-Behandlung.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="leistungen-cta">
+    <h2 class="section-title" style="font-size:2rem;">Haben Sie Fragen zu unseren Leistungen?</h2>
+    <p>Wir beraten Sie gerne persönlich und erarbeiten gemeinsam das beste Behandlungskonzept für Sie.</p>
+    <a href="#" class="btn-primary" data-page="kontakt">Termin vereinbaren</a>
+  </div>
+
+</div>
+
+
+<!-- ════ GALERIE PAGE ════ -->
+<div id="page-galerie" class="page">
+
+  <div class="galerie-hero">
+    <p class="section-eyebrow">Einblicke</p>
+    <h1 class="section-title">Unsere <em>Ordination</em></h1>
+    <p>Ein Blick in unsere moderne Praxis – wo Ästhetik und Funktionalität eine angenehme Atmosphäre für Ihre Behandlung schaffen.</p>
+  </div>
+
+  <div class="gallery-grid">
+
+    <div class="gallery-item gi-1" data-img="8B1A1019-1_B.jpg">
+      <img src="8B1A1019-1_B.jpg" alt="Chemisches Peeling – Gesichtsbehandlung">
+      <div class="gallery-caption">Chemisches Peeling</div>
+    </div>
+
+    <div class="gallery-item gi-2" data-img="8B1A1069_B.jpg">
+      <img src="8B1A1069_B.jpg" alt="Behandlungsraum der Ordination">
+      <div class="gallery-caption">Behandlungsraum</div>
+    </div>
+
+    <div class="gallery-item gi-3" data-img="8B1A1079_B.jpg">
+      <img src="8B1A1079_B.jpg" alt="Produktvitrine in der Ordination">
+      <div class="gallery-caption">Hautpflegeprodukte</div>
+    </div>
+
+    <div class="gallery-item gi-4" data-img="8B1A1085_B.jpg">
+      <img src="8B1A1085_B.jpg" alt="Kinderfreundliche Warteecke">
+      <div class="gallery-caption">Für unsere kleinen Patienten</div>
+    </div>
+
+    <div class="gallery-item gi-5" data-img="Treatment_Brille.jpg">
+      <img src="Treatment_Brille.jpg" alt="Laserbehandlung mit Schutzbrille">
+      <div class="gallery-caption">Laserbehandlung</div>
+    </div>
+
+    <div class="gallery-item gi-6" data-img="Treatment_Laser.jpg">
+      <img src="Treatment_Laser.jpg" alt="HydraFacial MD Behandlung">
+      <div class="gallery-caption">HydraFacial MD</div>
+    </div>
+
+    <div class="gallery-item gi-7" data-img="8B1A0015.jpg">
+      <img src="8B1A0015.jpg" alt="Blumenarrangement im Empfangsbereich">
+      <div class="gallery-caption">Empfangsbereich</div>
+    </div>
+
+    <div class="gallery-item gi-8" data-img="8B1A0029_B.jpg">
+      <img src="8B1A0029_B.jpg" alt="Wartezimmer der Ordination">
+      <div class="gallery-caption">Wartezimmer</div>
+    </div>
+
+    <div class="gallery-item gi-9" data-img="MA_Kath.jpg">
+      <img src="MA_Kath.jpg" alt="Unser Team">
+      <div class="gallery-caption">Unser Team</div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ════ KONTAKT PAGE ════ -->
+<div id="page-kontakt" class="page">
+<div class="kontakt-page">
+
+  <div class="kontakt-hero">
+    <div class="kontakt-hero-block">
+      <span class="kontakt-hero-label">Telefon</span>
+      <a href="tel:+432262XXXXX" class="kontakt-hero-value kontakt-hero-link">+43 2262 / XXX XX</a>
+      <p class="kontakt-hero-sub">Erreichbar während der Öffnungszeiten</p>
+    </div>
+    <div class="kontakt-hero-divider"></div>
+    <div class="kontakt-hero-block">
+      <span class="kontakt-hero-label">Öffnungszeiten</span>
+      <div class="kontakt-hero-value">Mo, Mi, Do &amp; Fr</div>
+      <p class="kontakt-hero-sub">Vormittags 08:00–12:00 Uhr<br>Mo, Mi, Do nachmittags bis 17/18 Uhr</p>
+    </div>
+    <div class="kontakt-hero-divider"></div>
+    <div class="kontakt-hero-block">
+      <span class="kontakt-hero-label">Adresse</span>
+      <div class="kontakt-hero-value">Hauptplatz 12, Korneuburg</div>
+      <p class="kontakt-hero-sub">Wahlarzt-Praxis · keine Kassenstelle</p>
+    </div>
+  </div>
+
+  <div class="kontakt-body">
+
+    <div class="kontakt-info">
+
+      <div class="oeffnung-table">
+        <h2 class="oeffnung-table-title">Öffnungszeiten</h2>
+        <div class="oeffnung-row"><span>Montag</span><span>08:00–12:00 &amp; 14:00–17:00</span></div>
+        <div class="oeffnung-row"><span>Dienstag</span><span>08:00–12:00</span></div>
+        <div class="oeffnung-row"><span>Mittwoch</span><span>08:00–12:00 &amp; 14:00–18:00</span></div>
+        <div class="oeffnung-row"><span>Donnerstag</span><span>08:00–12:00 &amp; 14:00–17:00</span></div>
+        <div class="oeffnung-row"><span>Freitag</span><span>08:00–13:00</span></div>
+        <div class="oeffnung-row closed"><span>Samstag &amp; Sonntag</span><span>Geschlossen</span></div>
+      </div>
+
+      <div class="kontakt-section">
+        <h2 class="kontakt-section-title">Telefon &amp; E-Mail</h2>
+        <a href="tel:+432262XXXXX" class="kontakt-phone-link">+43 2262 / XXX XX</a>
+        <a href="/cdn-cgi/l/email-protection#e9869b8d8087889d808687a98d9bc4889c8488909bc7889d" class="kontakt-email-link"><span class="__cf_email__" data-cfemail="d0bfa2b4b9beb1a4b9bfbe90b4a2fdb1a5bdb1a9a2feb1a4">[email&#160;protected]</span></a>
+        <a href="https://www.dr-aumayr.at" target="_blank" class="kontakt-web-link">www.dr-aumayr.at</a>
+      </div>
+
+      <div class="kontakt-section">
+        <h2 class="kontakt-section-title">Adresse &amp; Anreise</h2>
+        <p>Hauptplatz 12<br>2100 Korneuburg</p>
+        <p class="kontakt-anreise">Parkplätze direkt am Hauptplatz sowie in der Parkgarage Stadtgasse. Erreichbar mit Bus (Linie 560) und S-Bahn S2, Haltestelle Korneuburg.</p>
+      </div>
+
+    </div>
+
+    <div class="kontakt-map-col">
+      <div class="kontakt-map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2651.5!2d16.3316!3d48.3457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d0e7e5e8b!2sKorneuburg!5e0!3m2!1sde!2sat!4v1"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <div class="kontakt-adresse">
+        <p class="kontakt-adresse-name">Ordination Dr. Martina Aumayr</p>
+        <p>Hauptplatz 12<br>2100 Korneuburg</p>
+        <p class="kontakt-adresse-wahlarzt">Wahlarzt-Praxis – keine Kassenstelle</p>
+        <div class="kontakt-adresse-links">
+          <a href="tel:+432262XXXXX">+43 2262 / XXX XX</a>
+          <a href="/cdn-cgi/l/email-protection#6d021f0904030c190402032d091f400c18000c141f430c19"><span class="__cf_email__" data-cfemail="97f8e5f3fef9f6e3fef8f9d7f3e5baf6e2faf6eee5b9f6e3">[email&#160;protected]</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+<!-- ════ IMPRESSUM PAGE ════ -->
+<div id="page-impressum" class="page">
+<div style="padding-top:80px;">
+  <div style="max-width:780px; margin:0 auto; padding:5rem 6vw 7rem;">
+
+    <p class="section-eyebrow">Rechtliches</p>
+    <h1 class="section-title" style="margin-bottom:3rem;">Impressum</h1>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">Angaben gemäß § 5 ECG und § 25 MedienG</h2>
+      <p><strong>Dr. Martina Aumayr</strong><br>
+      Fachärztin für Dermatologie und ästhetische Medizin</p>
+      <p style="margin-top:0.6rem;">Hauptplatz 12<br>2100 Korneuburg<br>Niederösterreich, Österreich</p>
+      <p style="margin-top:0.6rem;">
+        Telefon: <a href="tel:+432262XXXXX">+43 2262 / XXX XX</a><br>
+        E-Mail: <a href="/cdn-cgi/l/email-protection#076875636e6966736e68694763752a66726a667e75296673"><span class="__cf_email__" data-cfemail="79160b1d1017180d101617391d0b54180c1418000b57180d">[email&#160;protected]</span></a><br>
+        Web: <a href="https://www.dr-aumayr.at" target="_blank">www.dr-aumayr.at</a>
+      </p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">Berufsrechtliche Angaben</h2>
+      <p><strong>Berufsbezeichnung:</strong> Fachärztin für Dermatologie und ästhetische Medizin<br>
+      (verliehen in der Republik Österreich)</p>
+      <p style="margin-top:0.6rem;"><strong>Ordinationsform:</strong> Wahlarztpraxis (keine Kassenverrechnung)</p>
+      <p style="margin-top:0.6rem;">
+        <strong>Zuständige Aufsichtsbehörde:</strong><br>
+        Österreichische Ärztekammer, Weihburggasse 10–12, 1010 Wien<br>
+        <a href="https://www.aerztekammer.at" target="_blank">www.aerztekammer.at</a>
+      </p>
+      <p style="margin-top:0.6rem;">
+        <strong>Zuständige Ärztekammer:</strong><br>
+        Ärztekammer für Niederösterreich, Wipplingerstraße 2, 1010 Wien<br>
+        <a href="https://www.arztnoe.at" target="_blank">www.arztnoe.at</a>
+      </p>
+      <p style="margin-top:0.6rem;">
+        <strong>Anwendbare Vorschriften:</strong>
+        Ärztegesetz 1998 (ÄrzteG 1998), BGBl. I Nr. 169/1998 idgF;
+        Berufsordnung der Österreichischen Ärztekammer –
+        abrufbar unter <a href="https://www.aerztekammer.at" target="_blank">www.aerztekammer.at</a>
+      </p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">Umsatzsteuer</h2>
+      <p>Ärztliche Leistungen sind gemäß § 6 Abs. 1 Z 19 UStG 1994 von der Umsatzsteuer befreit.</p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">Haftungsausschluss</h2>
+      <p>Die Inhalte dieser Website dienen ausschließlich der allgemeinen Information und ersetzen keine individuelle ärztliche Beratung, Diagnose oder Behandlung. Für die Richtigkeit, Vollständigkeit und Aktualität der bereitgestellten Informationen wird keine Gewähr übernommen.</p>
+      <p style="margin-top:0.6rem;">Trotz sorgfältiger Prüfung übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">Urheberrecht</h2>
+      <p>Alle auf dieser Website verwendeten Texte, Bilder und sonstigen Inhalte sind urheberrechtlich geschützt. Eine Vervielfältigung, Verbreitung oder sonstige Nutzung – auch auszugsweise – bedarf der ausdrücklichen schriftlichen Zustimmung von Dr. Martina Aumayr.</p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">Online-Streitbeilegung</h2>
+      <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung bereit:<br>
+      <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a></p>
+      <p style="margin-top:0.6rem;">Zur Teilnahme an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle sind wir nicht verpflichtet und nicht bereit.</p>
+    </div>
+
+    <p style="font-size:var(--text-sm); color:var(--text-muted); margin-top:3rem;">Stand: 2025</p>
+    <p style="font-size:var(--text-sm); color:var(--text-muted); margin-top:0.5rem;">Fotografie: Moritz Schell</p>
+
+  </div>
+</div>
+</div>
+
+
+<!-- ════ DATENSCHUTZ PAGE ════ -->
+<div id="page-datenschutz" class="page">
+<div style="padding-top:80px;">
+  <div style="max-width:780px; margin:0 auto; padding:5rem 6vw 7rem;">
+
+    <p class="section-eyebrow">Rechtliches</p>
+    <h1 class="section-title" style="margin-bottom:3rem;">Datenschutzerklärung</h1>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">1. Verantwortliche Person</h2>
+      <p>Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website ist:</p>
+      <p style="margin-top:0.6rem;">
+        <strong>Dr. Martina Aumayr</strong><br>
+        Fachärztin für Dermatologie und ästhetische Medizin<br>
+        Hauptplatz 12, 2100 Korneuburg<br>
+        Telefon: <a href="tel:+432262XXXXX">+43 2262 / XXX XX</a><br>
+        E-Mail: <a href="/cdn-cgi/l/email-protection#9af5e8fef3f4fbeef3f5f4dafee8b7fbeff7fbe3e8b4fbee"><span class="__cf_email__" data-cfemail="5a35283e33343b2e3335341a3e28773b2f373b2328743b2e">[email&#160;protected]</span></a>
+      </p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">2. Rechtsgrundlagen der Datenverarbeitung</h2>
+      <p>Die Verarbeitung personenbezogener Daten erfolgt auf Basis folgender Rechtsgrundlagen gemäß Art. 6 DSGVO:</p>
+      <p style="margin-top:0.6rem;"><strong>Art. 6 Abs. 1 lit. a DSGVO</strong> – Einwilligung der betroffenen Person</p>
+      <p><strong>Art. 6 Abs. 1 lit. b DSGVO</strong> – Vertragserfüllung und vorvertragliche Maßnahmen</p>
+      <p><strong>Art. 6 Abs. 1 lit. c DSGVO</strong> – Erfüllung rechtlicher Verpflichtungen</p>
+      <p><strong>Art. 6 Abs. 1 lit. f DSGVO</strong> – Berechtigte Interessen</p>
+      <p style="margin-top:0.6rem;">Für besonders sensible Gesundheitsdaten gilt zusätzlich <strong>Art. 9 Abs. 2 lit. h DSGVO</strong>.</p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">3. Verarbeitung von Patientendaten</h2>
+      <p>Im Rahmen des Arzt-Patienten-Verhältnisses werden folgende personenbezogene Daten verarbeitet: Name, Geburtsdatum, Kontaktdaten, Krankengeschichte, Diagnosen, Behandlungen, Laborwerte, Medikationen sowie sonstige medizinisch relevante Informationen.</p>
+      <p style="margin-top:0.6rem;"><strong>Aufbewahrungsdauer:</strong> Patientenunterlagen werden gemäß § 51 ÄrzteG mindestens 10 Jahre aufbewahrt.</p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">4. Nutzung dieser Website</h2>
+      <p>Beim Besuch dieser Website werden durch den Hosting-Anbieter automatisch folgende Daten in Server-Logfiles gespeichert: IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, verwendeter Browser und Betriebssystem.</p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">5. Kontaktaufnahme per E-Mail oder Telefon</h2>
+      <p>Wenn Sie uns per E-Mail oder Telefon kontaktieren, werden Ihre übermittelten Daten zur Bearbeitung Ihrer Anfrage verarbeitet. Die Daten werden nach abschließender Bearbeitung gelöscht, sofern keine gesetzliche Aufbewahrungspflicht besteht.</p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">6. Google Maps</h2>
+      <p>Diese Website verwendet Google Maps zur Darstellung einer interaktiven Karte. Bei Nutzung können Daten an Google-Server übertragen werden. Weitere Informationen finden Sie in der <a href="https://policies.google.com/privacy" target="_blank">Datenschutzerklärung von Google</a>.</p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">7. Ihre Rechte</h2>
+      <p>
+        <strong>Auskunft</strong> (Art. 15 DSGVO) · <strong>Berichtigung</strong> (Art. 16 DSGVO) · <strong>Löschung</strong> (Art. 17 DSGVO) · <strong>Einschränkung</strong> (Art. 18 DSGVO) · <strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO) · <strong>Widerspruch</strong> (Art. 21 DSGVO)
+      </p>
+      <p style="margin-top:0.6rem;">Zur Ausübung Ihrer Rechte: <a href="/cdn-cgi/l/email-protection#adc2dfc9c4c3ccd9c4c2c3edc9df80ccd8c0ccd4df83ccd9"><span class="__cf_email__" data-cfemail="1a75687e73747b6e7375745a7e68377b6f777b6368347b6e">[email&#160;protected]</span></a></p>
+    </div>
+
+    <div class="impressum-block">
+      <h2 class="impressum-heading">8. Beschwerderecht</h2>
+      <p>
+        <strong>Österreichische Datenschutzbehörde</strong><br>
+        Barichgasse 40–42, 1030 Wien · Telefon: +43 1 52 152-0<br>
+        <a href="https://www.dsb.gv.at" target="_blank">www.dsb.gv.at</a>
+      </p>
+    </div>
+
+    <p style="font-size:var(--text-sm); color:var(--text-muted); margin-top:3rem;">Stand: 2025</p>
+
+  </div>
+</div>
+</div>
+
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">Dr. Martina Aumayr</div>
+      <span class="footer-logo-sub">Hautärztin in Korneuburg</span>
+      <p>Fachärztliche Betreuung mit Empathie und Kompetenz. Ihre Hautgesundheit liegt uns am Herzen – in Korneuburg und der Region.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <a href="#" data-page="home">Startseite</a>
+      <a href="#" data-page="team">Team</a>
+      <a href="#" data-page="leistungen">Leistungen</a>
+      <a href="#" data-page="galerie">Galerie</a>
+      <a href="#" data-page="kontakt">Kontakt</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Leistungen</h4>
+      <a href="#" data-page="leistungen">Hautkrebsvorsorge</a>
+      <a href="#" data-page="leistungen">Allergologie</a>
+      <a href="#" data-page="leistungen">Ästhetik</a>
+      <a href="#" data-page="leistungen">Laserbehandlung</a>
+      <a href="#" data-page="leistungen">Akne &amp; Rosacea</a>
+      <a href="#" data-page="leistungen">Phlebologie</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Kontakt</h4>
+      <p>Hauptplatz 12</p>
+      <p>2100 Korneuburg</p>
+      <a href="tel:+432262XXXXX">+43 2262 / XXX XX</a>
+      <a href="/cdn-cgi/l/email-protection#305f4254595e5144595f5e7054421d51455d5149421e5144"><span class="__cf_email__" data-cfemail="442b36202d2a25302d2b2a04203669253129253d366a2530">[email&#160;protected]</span></a>
+      <p style="margin-top:0.5rem;">Mo–Fr: 08:00–12:00 Uhr</p>
+      <p>Mo, Mi, Do: 14:00–17:00 Uhr</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Dr. Martina Aumayr · Alle Rechte vorbehalten</p>
+    <p>Fotografie: Moritz Schell</p>
+    <div class="footer-links">
+      <a href="#" data-page="impressum">Impressum</a>
+      <a href="#" data-page="datenschutz">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close">✕</button>
+  <img src="" alt="" id="lightbox-img">
+</div>
+
+<script>
+  // ── Page navigation ──
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById('page-' + id);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+
+  document.addEventListener('click', function(e) {
+    const el = e.target.closest('[data-page]');
+    if (el) {
+      e.preventDefault();
+      const page = el.getAttribute('data-page');
+      if (page) showPage(page);
+    }
+  });
+
+  // ── Scroll nav shadow ──
+  window.addEventListener('scroll', function() {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // ── Hamburger ──
+  document.getElementById('hamburger').addEventListener('click', function() {
+    this.classList.toggle('open');
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+
+  // ── Lightbox ──
+  document.querySelectorAll('.gallery-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      const img = this.querySelector('img');
+      if (img) {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox-img').alt = img.alt;
+        document.getElementById('lightbox').classList.add('open');
+      }
+    });
+  });
+
+  document.getElementById('lightbox-close').addEventListener('click', function() {
+    document.getElementById('lightbox').classList.remove('open');
+  });
+
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
+  });
+</script>
+
+</body>
+</html>
